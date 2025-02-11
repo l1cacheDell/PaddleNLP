@@ -111,13 +111,19 @@ sources = [
     "./gpu/speculate_decoding_kernels/ngram_match.cc",
     "./gpu/speculate_decoding_kernels/speculate_save_output.cc",
     "./gpu/speculate_decoding_kernels/speculate_get_output.cc",
+    "./gpu/sage_attn_kernels/sageattn.cc"
 ]
 sources += find_end_files("./gpu/speculate_decoding_kernels", ".cu")
+sources += find_end_files("./gpu/sage_attn_kernels", ".cu")
 
 nvcc_compile_args = gencode_flags
 update_git_submodule()
 nvcc_compile_args += [
     "-O3",
+    "-std=c++17",
+    "--use_fast_math",
+    "--threads=8",
+    "-Xptxas=-v",
     "-U__CUDA_NO_HALF_OPERATORS__",
     "-U__CUDA_NO_HALF_CONVERSIONS__",
     "-U__CUDA_NO_BFLOAT16_OPERATORS__",
