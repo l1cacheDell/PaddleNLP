@@ -24,20 +24,25 @@ std::vector<paddle::Tensor> chunked_segment_mean_fwd(paddle::Tensor& input,     
                                                      const int max_seqlen);
 
 std::vector<paddle::Tensor> sage_attention_varlen_fwd(paddle::Tensor& q,          // total_seqlen x num_head x head_dim
-                                                      paddle::Tensor& k,          // total_seqlen x num_head x head_dim
-                                                      paddle::Tensor& v,          // total_seqlen x num_head x head_dim
-                                                      paddle::Tensor& cu_seqlen_q,
-                                                      paddle::Tensor& cu_seqlen_v_padded,
-                                                      const paddle::Tensor& seq_lens_encoder, // length of each segment this time
-                                                      paddle::Tensor& km,
-                                                      paddle::optional<paddle::Tensor>& vm,
-                                                      int max_seqlen_q,
-                                                      int max_seqlen_k,
-                                                      float sm_scale,
-                                                      std::string qk_quant_gran,
-                                                      std::string pv_accum_dtype,
-                                                      int tensor_layout,
-                                                      bool is_causal,
-                                                      bool smooth_k,
-                                                      bool smooth_v,
-                                                      bool return_lse);
+                                                            paddle::Tensor& k,          // total_seqlen x num_head x head_dim
+                                                            paddle::Tensor& v,          // total_seqlen x num_head x head_dim
+                                                            paddle::Tensor& cu_seqlen_q,
+                                                            paddle::Tensor& cu_seqlen_v_padded,
+                                                            const paddle::Tensor& seq_lens_encoder, // length of each segment this time
+                                                            paddle::Tensor& km,
+                                                            paddle::optional<paddle::Tensor>& vm,
+                                                            const paddle::optional<paddle::Tensor>& shift_bias,  // [num_kv_heads, head_dim]
+                                                            const paddle::optional<paddle::Tensor>& smooth_weight,  // [num_kv_heads, head_dim]
+                                                            int max_seqlen_q,
+                                                            int max_seqlen_k,
+                                                            float sm_scale,
+                                                            float quant_max_bound,      // quant
+                                                            float quant_min_bound,      // quant
+                                                            float in_scale,             // quant
+                                                            std::string qk_quant_gran,
+                                                            std::string pv_accum_dtype,
+                                                            int tensor_layout,
+                                                            bool is_causal,
+                                                            bool smooth_k,
+                                                            bool smooth_v,
+                                                            bool return_lse);

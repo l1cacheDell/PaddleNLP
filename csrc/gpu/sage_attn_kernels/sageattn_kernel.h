@@ -87,9 +87,14 @@ void SageAttentionKernel(
                                     seq_lens_encoder,
                                     km, 
                                     vm, 
+                                    shift_bias,
+                                    smooth_weight, 
                                     max_enc_len_this_time_data, // max_seqlen_q
                                     max_enc_len_this_time_data, // max_seqlen_k
                                     softmax_scale, 
+                                    quant_max_bound,
+                                    quant_min_bound,
+                                    in_scale,
                                     std::string("per_warp"), 
                                     std::string("any"), 
                                     0, 
