@@ -79,7 +79,7 @@ void SageAttentionKernel(
     // use varlen API
     paddle::optional<paddle::Tensor> vm = paddle::optional<paddle::Tensor>(paddle::empty({1}, paddle::DataType::FLOAT32, paddle::GPUPlace()));
 
-    *out = sage_attention_varlen_fwd(q, 
+    *out = sage_attention_varlen_fwd<T, OutT>(q, 
                                     k, 
                                     v, 
                                     *const_cast<paddle::Tensor*>(&cu_seqlen),

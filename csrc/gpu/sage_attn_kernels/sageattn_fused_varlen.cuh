@@ -23,6 +23,7 @@ std::vector<paddle::Tensor> chunked_segment_mean_fwd(paddle::Tensor& input,     
                                                      paddle::Tensor& cu_seqlens,    // [batch_size + 1], prefix-sum array of sequence lengths
                                                      const int max_seqlen);
 
+template <typename T, typename OutT>
 std::vector<paddle::Tensor> sage_attention_varlen_fwd(paddle::Tensor& q,          // total_seqlen x num_head x head_dim
                                                             paddle::Tensor& k,          // total_seqlen x num_head x head_dim
                                                             paddle::Tensor& v,          // total_seqlen x num_head x head_dim
